@@ -47,5 +47,11 @@ namespace WindowsFormsApplication1
         {
 
         }
+
+        private void vatInvoiceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RecordsManagement_Product p3 = new RecordsManagement_Product();
+            p3.Show();
+        }
     }
 }
