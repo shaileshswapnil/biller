@@ -8,3 +8,6 @@ c:\users\shailesh\documents\visual studio 2012\Projects\WindowsFormsApplication1
 c:\users\shailesh\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 c:\users\shailesh\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 C:\Users\Shailesh\documents\visual studio 2012\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Invoicing_Pay_Debit.resources
+C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
