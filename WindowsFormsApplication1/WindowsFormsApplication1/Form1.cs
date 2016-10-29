@@ -37,5 +37,15 @@ namespace WindowsFormsApplication1
             RecordsManagement_Company p1 = new RecordsManagement_Company();
             p1.Show();
         }
+
+        private void priceListDiscountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
