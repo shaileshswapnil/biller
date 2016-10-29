@@ -52,7 +52,6 @@
             this.tb_stock = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.tb_sku = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,12 +62,13 @@
             this.tb_qperpack = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.dp_manufacturing = new System.Windows.Forms.DateTimePicker();
             this.dp_expiary = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tb_msrp = new System.Windows.Forms.TextBox();
             this.tb_unitprice = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dp_manufacturing = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pb_image)).BeginInit();
             this.SuspendLayout();
             // 
@@ -310,17 +310,6 @@
             this.label11.TabIndex = 349;
             this.label11.Text = "Expiry date";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 408);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(152, 20);
-            this.label12.TabIndex = 348;
-            this.label12.Text = "Manufacturing date";
-            // 
             // tb_sku
             // 
             this.tb_sku.Location = new System.Drawing.Point(670, 297);
@@ -387,6 +376,7 @@
             this.cb_qunit.Name = "cb_qunit";
             this.cb_qunit.Size = new System.Drawing.Size(264, 24);
             this.cb_qunit.TabIndex = 339;
+            this.cb_qunit.Text = "pa";
             // 
             // tb_qperpack
             // 
@@ -417,31 +407,12 @@
             this.label18.TabIndex = 336;
             this.label18.Text = "Quantity unit";
             // 
-            // dp_manufacturing
-            // 
-            this.dp_manufacturing.Location = new System.Drawing.Point(199, 410);
-            this.dp_manufacturing.Name = "dp_manufacturing";
-            this.dp_manufacturing.Size = new System.Drawing.Size(264, 22);
-            this.dp_manufacturing.TabIndex = 365;
-            this.dp_manufacturing.ValueChanged += new System.EventHandler(this.dp_manufacturing_ValueChanged);
-            // 
             // dp_expiary
             // 
             this.dp_expiary.Location = new System.Drawing.Point(671, 410);
             this.dp_expiary.Name = "dp_expiary";
             this.dp_expiary.Size = new System.Drawing.Size(260, 22);
             this.dp_expiary.TabIndex = 366;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(198, 383);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(191, 21);
-            this.checkBox1.TabIndex = 367;
-            this.checkBox1.Text = "Insert manufacturing date";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -467,6 +438,36 @@
             this.tb_unitprice.Name = "tb_unitprice";
             this.tb_unitprice.Size = new System.Drawing.Size(264, 22);
             this.tb_unitprice.TabIndex = 369;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(198, 383);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(191, 21);
+            this.checkBox1.TabIndex = 367;
+            this.checkBox1.Text = "Insert manufacturing date";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // dp_manufacturing
+            // 
+            this.dp_manufacturing.Location = new System.Drawing.Point(199, 410);
+            this.dp_manufacturing.Name = "dp_manufacturing";
+            this.dp_manufacturing.Size = new System.Drawing.Size(264, 22);
+            this.dp_manufacturing.TabIndex = 365;
+            this.dp_manufacturing.ValueChanged += new System.EventHandler(this.dp_manufacturing_ValueChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(13, 408);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(152, 20);
+            this.label12.TabIndex = 348;
+            this.label12.Text = "Manufacturing date";
             // 
             // RecordsManagement_Product
             // 
@@ -551,7 +552,6 @@
         private System.Windows.Forms.TextBox tb_stock;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tb_sku;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
@@ -562,12 +562,13 @@
         private System.Windows.Forms.TextBox tb_qperpack;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.DateTimePicker dp_manufacturing;
         private System.Windows.Forms.DateTimePicker dp_expiary;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox tb_msrp;
         private System.Windows.Forms.TextBox tb_unitprice;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.DateTimePicker dp_manufacturing;
+        private System.Windows.Forms.Label label12;
 
     }
 }

@@ -74,6 +74,57 @@ namespace WindowsFormsApplication1
             }
         }
 
+        void load_unit1_data()
+        {
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+            String SqlString = @"SELECT DISTINCT QuantityUnit FROM Product";
+            tb_company.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tb_company.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            String Sname = dr.GetString(0);
+                            coll.Add(Sname);
+
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    tb_company.AutoCompleteCustomSource = coll;
+                    connection.Close();
+
+                }
+
+
+            }
+        }
+
+
         void load_attribute_data()
         {
 
@@ -204,13 +255,13 @@ namespace WindowsFormsApplication1
 
             if (checkBox1.Checked == true)
             {
-                ManufacturingDate = dp_manufacturing.Value;
+                ManufacturingDate = dp_manufacturing.Value.Date;
             }
             else ManufacturingDate = null;
 
             if (checkBox2.Checked == true)
             {
-                ExpiaryDate = dp_expiary.Value;
+                ExpiaryDate = dp_expiary.Value.Date;
             }
             else ExpiaryDate = null;
 
