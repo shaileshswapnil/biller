@@ -39,8 +39,8 @@ namespace WindowsFormsApplication1
 
         private void payRecieveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RecordsManagement_Company p1 = new RecordsManagement_Company();
-            p1.Show();
+            RecordsManagement_Company company = new RecordsManagement_Company();
+            company.Show();
         }
 
         private void priceListDiscountToolStripMenuItem_Click(object sender, EventArgs e)
