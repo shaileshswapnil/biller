@@ -14,6 +14,11 @@ namespace WindowsFormsApplication1
 {
     public partial class RecordsManagement_Company : Form
     {
+
+        public RecordsManagement_Company()
+        {
+            InitializeComponent();
+        }
         public static byte[] ImageToByte2(Image img)
         {
             byte[] byteArray = new byte[0];
@@ -25,10 +30,6 @@ namespace WindowsFormsApplication1
                 byteArray = stream.ToArray();
             }
             return byteArray;
-        }
-        public RecordsManagement_Company()
-        {
-            InitializeComponent();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -80,39 +81,130 @@ namespace WindowsFormsApplication1
                 //Create a SqlCommand instance
                 SqlCommand command = new SqlCommand(SqlString, connection);
                 //Add the parameter
-                command.Parameters.AddWithValue("@CompnayName", tb_company.Text);
-                command.Parameters.AddWithValue("@Fname", tb_fname.Text);
-                command.Parameters.AddWithValue("@Lname", tb_lname.Text);
-                command.Parameters.AddWithValue("@mobile", tb_mobile.Text);
-                command.Parameters.AddWithValue("@email", tb_c_email.Text);
-                command.Parameters.AddWithValue("@address", tb_address.Text);
-                command.Parameters.AddWithValue("@city", tb_city.Text);
-                command.Parameters.AddWithValue("@state", tb_state.Text);
-                command.Parameters.AddWithValue("@country", tb_country.Text);
-                command.Parameters.AddWithValue("@pin", tb_pin.Text);
-                command.Parameters.AddWithValue("@pnumber", tb_pnumber.Text);
-                command.Parameters.AddWithValue("@snumber", tb_snumber.Text);
-                command.Parameters.AddWithValue("@fax", tb_fax.Text);
-                command.Parameters.AddWithValue("@cemail", tb_email.Text);
-                command.Parameters.AddWithValue("@url", tb_website.Text);
-                //command.Parameters.AddWithValue("@catagory", int.Parse(tb_catagory.ToString()));
-                command.Parameters.AddWithValue("@image", ImageToByte2(pictureBox1.Image));
+                if (tb_company.Text == "")
+                {
+                    MessageBox.Show("Company name can not be empty");
+                    return;
+                }
+                else command.Parameters.AddWithValue("@CompnayName", tb_company.Text);
+
+                if (tb_fname.Text == "")
+                {
+                    MessageBox.Show("Conatnt first name can not be empty");
+                    return;
+                }
+                else command.Parameters.AddWithValue("@Fname", tb_fname.Text);
+
+                if (tb_lname.Text == "")
+                {
+                    MessageBox.Show("Conatnt last name can not be empty");
+                    return;
+                }
+                else command.Parameters.AddWithValue("@Lname", tb_lname.Text);
+
+                if (tb_mobile.Text == "")
+                {
+                    MessageBox.Show("Conatnt mobile number can not be empty");
+                    return;
+                }
+                else command.Parameters.AddWithValue("@mobile", tb_mobile.Text);
+
+                if (tb_c_email.Text == "")
+                {
+                    command.Parameters.AddWithValue("@email", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@email", tb_c_email.Text);
+
+                if (tb_address.Text == "")
+                {
+                    command.Parameters.AddWithValue("@address", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@address", tb_address.Text);
+
+                if (tb_city.Text == "")
+                {
+                    command.Parameters.AddWithValue("@city", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@city", tb_city.Text);
+
+                if (tb_state.Text == "")
+                {
+                    command.Parameters.AddWithValue("@state", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@state", tb_state.Text);
+
+                if (tb_country.Text == "")
+                {
+                    command.Parameters.AddWithValue("@country", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@country", tb_country.Text);
+
+                if (tb_pin.Text == "")
+                {
+                    command.Parameters.AddWithValue("@pin", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@pin", tb_pin.Text);
+
+                if (tb_pnumber.Text == "")
+                {
+                    command.Parameters.AddWithValue("@pnumber", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@pnumber", tb_pnumber.Text);
+
+                if (tb_snumber.Text == "")
+                {
+                    command.Parameters.AddWithValue("@snumber", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@snumber", tb_snumber.Text);
+
+                if (tb_fax.Text == "")
+                {
+                    command.Parameters.AddWithValue("@fax", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@fax", tb_fax.Text);
+
+                if (tb_email.Text == "")
+                {
+                    command.Parameters.AddWithValue("@cemail", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@cemail", tb_email.Text);
+
+                if (tb_website.Text == "")
+                {
+                    command.Parameters.AddWithValue("@url", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@url", tb_website.Text);
+
+                if (pictureBox1.Image == null)
+                {
+                    SqlParameter imageParameter = new SqlParameter("@image", SqlDbType.Image);
+                    imageParameter.Value = DBNull.Value;
+                    command.Parameters.Add(imageParameter);
+                }
+                else command.Parameters.AddWithValue("@image", ImageToByte2(pictureBox1.Image));
+
                 //Execute the query
                 try
                 {
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-                catch(Exception error)
+                catch (Exception error)
                 {
-                    MessageBox.Show(error.Message, "Error!");
+                    MessageBox.Show(error.Message);
+                    String error_message = error.Message;
+                    if (error_message.Contains("Violation of PRIMARY KEY constraint") == true)
+                    {
+                        MessageBox.Show("This company name already exists, Please try to view the details first");
+                        return;
+                    }
                 }
                 finally
                 {
                     connection.Close();
                 }
             }
-               
+
         }
 
         private void tb_mobile_TextChanged(object sender, EventArgs e)
@@ -123,7 +215,7 @@ namespace WindowsFormsApplication1
         //Coding for mobile text box to accecpt number only
         private void tb_mobile_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Char ch=e.KeyChar ;
+            Char ch = e.KeyChar;
             if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
             {
                 e.Handled = true;
