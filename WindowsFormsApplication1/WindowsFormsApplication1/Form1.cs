@@ -71,6 +71,12 @@ namespace WindowsFormsApplication1
             speechSynthesizer.SpeakAsync("Time is now: " + lb_mainpagetimer.Text);
         }
 
+        private void productToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RecordsManagement_View_Product recordsManagement_View_Product = new RecordsManagement_View_Product();
+            recordsManagement_View_Product.Show();
+        }
+
         //private void button10_Click(object sender, EventArgs e)
         //{
         //    Choices sList = new Choices();

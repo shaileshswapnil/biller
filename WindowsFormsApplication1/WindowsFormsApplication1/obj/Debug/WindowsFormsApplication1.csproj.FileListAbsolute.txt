@@ -32,3 +32,4 @@ C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\Windo
 C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RecordsManagement_Company.resources
 C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RecordsManagement_View_Product.resources
