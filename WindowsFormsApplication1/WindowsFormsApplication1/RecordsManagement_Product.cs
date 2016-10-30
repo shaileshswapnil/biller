@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Speech;
+using System.Speech.Synthesis;
 
 namespace WindowsFormsApplication1
 {
@@ -19,8 +21,6 @@ namespace WindowsFormsApplication1
         public RecordsManagement_Product()
         {
             InitializeComponent();
-            dp_manufacturing.Enabled = false;
-            dp_expiary.Enabled = false;
             load_company_data();
             load_attribute_data();
         }
@@ -83,8 +83,8 @@ namespace WindowsFormsApplication1
             "Password=12345678;";
 
             String SqlString = @"SELECT DISTINCT QuantityUnit FROM Product";
-            tb_company.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            tb_company.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            cb_qunit.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cb_qunit.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
 
 
@@ -213,30 +213,10 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked==true) 
-            {
-                dp_manufacturing.Enabled = true;
-            }
-            else dp_manufacturing.Enabled = false;
-            
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            
-            if (checkBox2.Checked==true) 
-            {
-                dp_expiary.Enabled = true;
-            }
-            else dp_expiary.Enabled = false;    
-        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             int compnayId = 0,attributeId=0;
-            DateTime? ManufacturingDate, ExpiaryDate;
             byte[] image;
             String connectionString =
             "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
@@ -253,17 +233,6 @@ namespace WindowsFormsApplication1
                 image = ImageToByte2(pb_image.Image);
             }
 
-            if (checkBox1.Checked == true)
-            {
-                ManufacturingDate = dp_manufacturing.Value.Date;
-            }
-            else ManufacturingDate = null;
-
-            if (checkBox2.Checked == true)
-            {
-                ExpiaryDate = dp_expiary.Value.Date;
-            }
-            else ExpiaryDate = null;
 
 
             String SqlString = @"SELECT CompanyId FROM Company WHERE CompanyName='" + tb_company.Text + "'";
@@ -323,8 +292,8 @@ namespace WindowsFormsApplication1
 
             }
 
-            SqlString = @"INSERT INTO Product (ProductName,ProductDescription,VendorSKU,AttributeId,CompanyId,CatagoryId,QuantityPerPack,PackUnit,QuantityUnit,UnitPrice,MSRP,ManufacturingDate,ExpiaryDate,UnitInStock,ReOrderQuantity,Discount,DiscountIsActive,ProductImage,Note) 
-            VALUES (@ProductName,@ProductDescription,@VendorSKU,@AttributeId,@compnayId,@CatagoryId,@QuantityPerPack,@PackUnit,@QuantityUnit,@UnitPrice,@MSRP,@ManufacturingDate,@ExpiaryDate,@UnitInStock,@ReOrderQuantity,@Discount,@DiscountIsActive,@image,@Note); ";
+            SqlString = @"INSERT INTO Product (ProductName,ProductDescription,VendorSKU,AttributeId,CompanyId,CatagoryId,QuantityPerPack,PackUnit,QuantityUnit,UnitPrice,MSRP,ReOrderQuantity,Discount,DiscountIsActive,ProductImage,Note) 
+            VALUES (@ProductName,@ProductDescription,@VendorSKU,@AttributeId,@compnayId,@CatagoryId,@QuantityPerPack,@PackUnit,@QuantityUnit,@UnitPrice,@MSRP,@ReOrderQuantity,@Discount,@DiscountIsActive,@image,@Note); ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -334,18 +303,6 @@ namespace WindowsFormsApplication1
                 command.Parameters.AddWithValue("@compnayId", compnayId);
                 command.Parameters.AddWithValue("@AttributeId", attributeId);
                 
-                if (ManufacturingDate == null)
-                {
-                    command.Parameters.AddWithValue("@ManufacturingDate", DBNull.Value);
-                }
-                else command.Parameters.AddWithValue("@ManufacturingDate", ManufacturingDate);
-
-                if (ExpiaryDate == null)
-                {
-                    command.Parameters.AddWithValue("@ExpiaryDate", DBNull.Value);
-                }
-                else command.Parameters.AddWithValue("@ExpiaryDate", ExpiaryDate);
-
                 if (image == null)
                 {
                     SqlParameter imageParameter = new SqlParameter("@image", SqlDbType.Image);
@@ -403,11 +360,6 @@ namespace WindowsFormsApplication1
                 }
                 else command.Parameters.AddWithValue("@MSRP", decimal.Parse(tb_msrp.Text));
 
-                if (tb_stock.Text == "")
-                {
-                    command.Parameters.AddWithValue("@UnitInStock", DBNull.Value);
-                }
-                else command.Parameters.AddWithValue("@UnitInStock", int.Parse(tb_stock.Text));
 
                 if (tb_order.Text == "")
                 {
@@ -463,6 +415,18 @@ namespace WindowsFormsApplication1
 
         private void button1_Click_2(object sender, EventArgs e)
         {
+
+        }
+
+        private void tb_product_MouseHover(object sender, EventArgs e)
+        {
+            SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
+            if (tb_product.Text != "")
+            {
+                speechSynthesizer.Dispose();
+                speechSynthesizer=new SpeechSynthesizer();
+                speechSynthesizer.SpeakAsync(tb_product.Text);
+            }
 
         }
 
