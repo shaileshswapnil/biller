@@ -83,28 +83,28 @@ namespace WindowsFormsApplication1
                 //Add the parameter
                 if (tb_company.Text == "")
                 {
-                    MessageBox.Show("Company name can not be empty");
+                    MessageBox.Show("Company name cannot be empty");
                     return;
                 }
                 else command.Parameters.AddWithValue("@CompnayName", tb_company.Text);
 
                 if (tb_fname.Text == "")
                 {
-                    MessageBox.Show("Conatnt first name can not be empty");
+                    MessageBox.Show("Contact first name cannot be empty");
                     return;
                 }
                 else command.Parameters.AddWithValue("@Fname", tb_fname.Text);
 
                 if (tb_lname.Text == "")
                 {
-                    MessageBox.Show("Conatnt last name can not be empty");
+                    MessageBox.Show("Contact last name cannot be empty");
                     return;
                 }
                 else command.Parameters.AddWithValue("@Lname", tb_lname.Text);
 
                 if (tb_mobile.Text == "")
                 {
-                    MessageBox.Show("Conatnt mobile number can not be empty");
+                    MessageBox.Show("Conatnt mobile number cannot be empty");
                     return;
                 }
                 else command.Parameters.AddWithValue("@mobile", tb_mobile.Text);
@@ -195,7 +195,7 @@ namespace WindowsFormsApplication1
                     String error_message = error.Message;
                     if (error_message.Contains("Violation of PRIMARY KEY constraint") == true)
                     {
-                        MessageBox.Show("This company name already exists, Please try to view the details first");
+                        MessageBox.Show("This company name already exists, please try to view the details first");
                         return;
                     }
                 }
