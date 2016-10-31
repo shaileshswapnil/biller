@@ -17,12 +17,113 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             timer1.Start();
+            load_product_data();
             load_company_data();
+            load_attribute_data();
             DateTime toDate = DateTime.Today.Date;
             DateTime fromDate = toDate.AddDays(-30);
             dp_from.Value = fromDate;
         }
-        void load_company_data()
+
+        private void load_attribute_data()
+        {
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+            String SqlString = @"SELECT AttributeName FROM Attribute";
+            tb_salts.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tb_salts.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            String Sname = dr.GetString(0);
+                            coll.Add(Sname);
+
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    tb_salts.AutoCompleteCustomSource = coll;
+                    connection.Close();
+
+                }
+
+
+            }
+
+        }
+
+        private void load_company_data()
+        {
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+            String SqlString = @"SELECT CompanyName FROM Company";
+            tb_company.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            tb_company.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            String Sname = dr.GetString(0);
+                            coll.Add(Sname);
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    tb_company.AutoCompleteCustomSource = coll;
+                    connection.Close();
+
+                }
+            }
+
+        }
+        void load_product_data()
         {
             String connectionString =
             "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
@@ -34,6 +135,12 @@ namespace WindowsFormsApplication1
             cb_product.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cb_product.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+            cb_product.Items.Clear();
+            for (int i = 0; i < coll.Count; i++)
+            {
+                coll.RemoveAt(0);
+            }
 
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -117,8 +224,36 @@ namespace WindowsFormsApplication1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            reset_form();
+            cb_product.Text = "";
         }
+
+        private void reset_form()
+        {
+            DateTime toDate = DateTime.Today.Date;
+            DateTime fromDate = toDate.AddDays(-30);
+            dp_from.Value = fromDate;
+            dp_to.Value = toDate;
+            foreach (var series in chart_sales.Series) { series.Points.Clear(); }
+            foreach (var series in chart_profit.Series) { series.Points.Clear(); }
+            foreach (var series in chart_stock.Series) { series.Points.Clear(); }
+            foreach (var series in chart_salesprediction.Series) { series.Points.Clear(); }
+            tb_company.Text = "";
+            tb_description.Text = "";
+            tb_catagory.Text = "";
+            tb_msrp.Text = "";
+            tb_orderquantity.Text = "";
+            tb_punit.Text = "";
+            tb_qunit.Text = "";
+            tb_salts.Text = "";
+            tb_stock.Text = "";
+            tb_unitprice.Text = "";
+            cb_h.Checked = false;
+            cb_h1.Checked = false;
+            cb_narcotics.Checked = false;
+        }
+
+
 
         private void cb_product_TextChanged(object sender, EventArgs e)
         {
@@ -129,6 +264,7 @@ namespace WindowsFormsApplication1
         {
             if (cb_product.SelectedIndex > -1)
             {
+                reset_form();
                 String productName = cb_product.Text;
                 populate_product_data(productName);
 
@@ -207,6 +343,7 @@ namespace WindowsFormsApplication1
 
 
                             tb_stock.Text = ""; //Stock code will be crated after creation of inventory
+                            tb_stock.ReadOnly = true;
 
                             if (dr.IsDBNull(dr.GetOrdinal("ReorderQuantity")))
                             {
@@ -236,19 +373,7 @@ namespace WindowsFormsApplication1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            foreach (var series in chart_sales.Series) { series.Points.Clear(); }
-            foreach (var series in chart_profit.Series) { series.Points.Clear(); }
-            foreach (var series in chart_stock.Series) { series.Points.Clear(); }
-            Random random=new Random();
-            for(int i=1;i<=30;i++)
-            {
-                int randomNumber = random.Next(0, 200);
-                this.chart_sales.Series["Sales"].Points.AddXY(i, randomNumber);
-                randomNumber = random.Next(0, 200);
-                this.chart_profit.Series["Profit"].Points.AddXY(i, randomNumber);
-                randomNumber = random.Next(0, 200);
-                this.chart_stock.Series["Stock"].Points.AddXY(i, randomNumber);
-            }
+
         }
 
         private void chart_sales_Click(object sender, EventArgs e)
@@ -272,7 +397,7 @@ namespace WindowsFormsApplication1
             fromDate = dp_from.Value;
             TimeSpan totoalDays = (toDate-fromDate);
             int dayCount = totoalDays.Days;
-            if (dayCount > 0 || dayCount < 60)
+            if (dayCount > 0 && dayCount < 60)
             {
                 foreach (var series in chart_sales.Series) { series.Points.Clear(); }
                 foreach (var series in chart_profit.Series) { series.Points.Clear(); }
@@ -290,6 +415,238 @@ namespace WindowsFormsApplication1
                     randomNumber = random.Next(0, 200);
                     this.chart_salesprediction.Series["Sales Prediction"].Points.AddXY(i, randomNumber);
                 }
+            }
+            else if (dayCount <= 0)
+            {
+                MessageBox.Show("To date must be less than From date");
+            }
+            else if (dayCount > 60)
+            {
+                MessageBox.Show("To view more than 60 days data, please go to report section");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RecordsManagement_Product product = new RecordsManagement_Product();
+            product.TopMost = true;
+            product.Show();  
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult result = MessageBox.Show("Are you sure that you want to update product: "+cb_product.Text+" ?", "Warning",
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                update_product();
+            }
+            else if (result == DialogResult.No)
+            {
+                
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                
+            }
+            
+        }
+
+        private void update_product()
+        {
+            int attributeId = 0, companyId = 0;
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+
+            String SqlString = @"Select CompanyId from Company Where CompanyName='"+tb_company.Text+"';";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            companyId = dr.GetInt32(dr.GetOrdinal("CompanyId"));
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+
+
+            }
+
+            SqlString = @"Select AttributeId from Attribute Where AttributeName='" + tb_salts.Text + "';";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            attributeId = dr.GetInt32(dr.GetOrdinal("AttributeId"));
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+
+            }
+            SqlString = @"Update Product SET ProductDescription=@ProductDescription,AttributeId=@AttributeId,CompanyId=@CompanyId,PackUnit=@PackUnit,QuantityUnit=@QuantityUnit,UnitPrice=@UnitPrice,MSRP=@MSRP,ReOrderQuantity=@ReOrderQuantity Where ProductName=@ProductName;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(SqlString, connection);
+
+                command.Parameters.AddWithValue("@CompanyId", companyId);
+                command.Parameters.AddWithValue("@AttributeId", attributeId);
+                command.Parameters.AddWithValue("@ProductName", cb_product.Text);
+                if (tb_description.Text == "")
+                {
+                    command.Parameters.AddWithValue("@ProductDescription", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@ProductDescription", tb_description.Text);
+
+                if (tb_punit.Text == "")
+                {
+                    command.Parameters.AddWithValue("@PackUnit", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@PackUnit", tb_punit.Text);
+
+                if (tb_qunit.Text == "")
+                {
+                    command.Parameters.AddWithValue("@QuantityUnit", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@QuantityUnit", tb_qunit.Text);
+
+                if (tb_unitprice.Text == "")
+                {
+                    command.Parameters.AddWithValue("@UnitPrice", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@UnitPrice", Decimal.Parse(tb_unitprice.Text));
+
+                if (tb_msrp.Text == "")
+                {
+                    command.Parameters.AddWithValue("@MSRP", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@MSRP", Decimal.Parse(tb_msrp.Text));
+
+                if (tb_orderquantity.Text == "")
+                {
+                    command.Parameters.AddWithValue("@ReOrderQuantity", DBNull.Value);
+                }
+                else command.Parameters.AddWithValue("@ReOrderQuantity", int.Parse(tb_orderquantity.Text));
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("You have updated Product: " + cb_product.Text);
+                    reset_form();
+                    cb_product.Text = "";
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+
+            }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            
+            DialogResult result = MessageBox.Show("Are you sure that you want to parmanently delete product: " + cb_product.Text + " ?", "Warning",
+            MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (result == DialogResult.Yes)
+            {
+                remove_product();
+            }
+            else if (result == DialogResult.No)
+            {
+
+            }
+            else if (result == DialogResult.Cancel)
+            {
+
+            }
+        }
+
+        private void remove_product()
+        {
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+
+            String SqlString = @"Delete from Product Where ProductName=@ProductName;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(SqlString, connection);
+                command.Parameters.AddWithValue("ProductName", cb_product.Text);
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("You have deleted Product: " + cb_product.Text);
+                    reset_form();
+                    load_product_data();
+                    cb_product.Text = "";
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    connection.Close();
+
+                }
+
+
             }
         }
     }
