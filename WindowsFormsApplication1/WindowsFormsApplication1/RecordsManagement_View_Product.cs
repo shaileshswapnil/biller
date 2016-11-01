@@ -23,6 +23,10 @@ namespace WindowsFormsApplication1
             DateTime toDate = DateTime.Today.Date;
             DateTime fromDate = toDate.AddDays(-30);
             dp_from.Value = fromDate;
+            chk_stock.Checked = true;
+            chart_unchecked("Profit");
+            chart_unchecked("Sales");
+            chart_unchecked("Prediction");
         }
 
         private void load_attribute_data()
@@ -182,7 +186,7 @@ namespace WindowsFormsApplication1
         private void RecordsManagement_View_Product_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -234,10 +238,10 @@ namespace WindowsFormsApplication1
             DateTime fromDate = toDate.AddDays(-30);
             dp_from.Value = fromDate;
             dp_to.Value = toDate;
-            foreach (var series in chart_sales.Series) { series.Points.Clear(); }
-            foreach (var series in chart_profit.Series) { series.Points.Clear(); }
-            foreach (var series in chart_stock.Series) { series.Points.Clear(); }
-            foreach (var series in chart_salesprediction.Series) { series.Points.Clear(); }
+            //foreach (var series in chart_sales.Series) { series.Points.Clear(); }
+            //foreach (var series in chart_profit.Series) { series.Points.Clear(); }
+            //foreach (var series in chart_stock.Series) { series.Points.Clear(); }
+            //foreach (var series in chart_salesprediction.Series) { series.Points.Clear(); }
             tb_company.Text = "";
             tb_description.Text = "";
             tb_catagory.Text = "";
@@ -392,38 +396,27 @@ namespace WindowsFormsApplication1
         }
         private void calender_change()
         {
-            DateTime toDate, fromDate;
-            toDate = dp_to.Value;
-            fromDate = dp_from.Value;
-            TimeSpan totoalDays = (toDate-fromDate);
-            int dayCount = totoalDays.Days;
-            if (dayCount > 0 && dayCount < 60)
+            if (chk_sales.Checked == true)
             {
-                foreach (var series in chart_sales.Series) { series.Points.Clear(); }
-                foreach (var series in chart_profit.Series) { series.Points.Clear(); }
-                foreach (var series in chart_stock.Series) { series.Points.Clear(); }
-                foreach (var series in chart_salesprediction.Series) { series.Points.Clear(); }
-                Random random = new Random();
-                for (int i = 1; i <= dayCount; i++)
-                {
-                    int randomNumber = random.Next(0, 200);
-                    this.chart_sales.Series["Sales"].Points.AddXY(i, randomNumber);
-                    randomNumber = random.Next(0, 200);
-                    this.chart_profit.Series["Profit"].Points.AddXY(i, randomNumber);
-                    randomNumber = random.Next(0, 200);
-                    this.chart_stock.Series["Stock"].Points.AddXY(i, randomNumber);
-                    randomNumber = random.Next(0, 200);
-                    this.chart_salesprediction.Series["Sales Prediction"].Points.AddXY(i, randomNumber);
-                }
+                chart_unchecked("Sales");
+                chart_checked("Sales");
             }
-            else if (dayCount <= 0)
+            if (chk_profit.Checked == true)
             {
-                MessageBox.Show("To date must be less than From date");
+                chart_unchecked("Profit");
+                chart_checked("Profit");
             }
-            else if (dayCount > 60)
+            if (chk_stock.Checked == true)
             {
-                MessageBox.Show("To view more than 60 days data, please go to report section");
+                chart_unchecked("Stock");
+                chart_checked("Stock");
             }
+            if (chk_prediction.Checked == true)
+            {
+                chart_unchecked("Prediction");
+                chart_checked("Prediction");
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -650,5 +643,80 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void chk_sales_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_sales.Checked == true)
+            {
+                chart_checked("Sales");
+            }
+            else
+            {
+                chart_unchecked("Sales");
+            }
+        }
+
+
+
+        private void chk_profit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_profit.Checked == true)
+            {
+                chart_checked("Profit");
+            }
+            else
+            {
+                chart_unchecked("Profit");
+            }
+        }
+
+        private void chk_stock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_stock.Checked == true)
+            {
+                chart_checked("Stock");
+            }
+            else
+            {
+                chart_unchecked("Stock");
+            }
+        }
+
+        private void chk_prediction_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_prediction.Checked == true)
+            {
+                chart_checked("Prediction");
+            }
+            else
+            {
+                chart_unchecked("Prediction");
+            }
+        }
+        private void chart_checked(String check_name)
+        {
+            chart1.Series[check_name].Enabled = true;
+            chart1.Series[check_name].Points.Clear();
+            DateTime toDate, fromDate;
+            toDate = dp_to.Value;
+            fromDate = dp_from.Value;
+            TimeSpan totoalDays = (toDate - fromDate);
+            int dayCount = totoalDays.Days;
+            if (dayCount > 0 && dayCount < 60)
+            {
+                Random random = new Random();
+                for (int i = 1; i <= dayCount; i++)
+                {
+                    int randomNumber = random.Next(0, 200);
+                    this.chart1.Series[check_name].Points.AddXY(i, randomNumber);
+                }
+            }
+        }
+
+        private void chart_unchecked(String check_name)
+        {
+            chart1.Series[check_name].Enabled = false;
+        }
+
     }
+
 }

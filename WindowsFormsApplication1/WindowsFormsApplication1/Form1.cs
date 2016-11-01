@@ -77,6 +77,12 @@ namespace WindowsFormsApplication1
             recordsManagement_View_Product.Show();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Billing_Create b1 = new Billing_Create();
+            b1.Show();
+        }
+
         //private void button10_Click(object sender, EventArgs e)
         //{
         //    Choices sList = new Choices();
