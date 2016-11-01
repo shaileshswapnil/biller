@@ -21,3 +21,11 @@ C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsA
 C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RecordsManagement_View_Product.resources
+<<<<<<< HEAD
+=======
+C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RecordsManagement_View_Product.resources
+C:\Users\Shailesh\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Billing_Create.resources
+>>>>>>> c865e770f79e48dba038816c360efbcdb839ee02
+C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Avishek Adhvaryu\Documents\GitHub\biller\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
