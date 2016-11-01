@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Billing_Create());
+            Application.Run(new Form1());
         }
         public static void ClearControl(Control control)
         {
