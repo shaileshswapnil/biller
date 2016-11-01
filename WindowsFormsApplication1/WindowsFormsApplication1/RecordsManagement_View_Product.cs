@@ -181,9 +181,9 @@ namespace WindowsFormsApplication1
 
         private void RecordsManagement_View_Product_Load(object sender, EventArgs e)
         {
-            //this.TopMost = true;
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -649,5 +649,6 @@ namespace WindowsFormsApplication1
 
             }
         }
+
     }
 }
