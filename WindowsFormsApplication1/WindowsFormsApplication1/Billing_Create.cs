@@ -51,25 +51,23 @@ namespace WindowsFormsApplication1
         {
             tb_orderdate.Text = DateTime.Now.ToShortDateString();
             tb_ordertime.Text = DateTime.Now.ToShortTimeString();
-            dataGridView2.ColumnCount = 9;
+            dataGridView2.ColumnCount = 8;
             dataGridView2.Columns[0].Name = "Sl no";
             dataGridView2.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView2.Columns[1].Name = "Product Name";
             dataGridView2.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView2.Columns[2].Name = "Price";
-            dataGridView2.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView2.Columns[2].Width = 150;
             dataGridView2.Columns[3].Name = "Quantity";
-            dataGridView2.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView2.Columns[3].Width = 150;
             dataGridView2.Columns[4].Name = "Unit";
-            dataGridView2.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView2.Columns[5].Name = "Tax";
-            dataGridView2.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView2.Columns[6].Name = "Discount";
-            dataGridView2.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView2.Columns[7].Name = "Tax";
-            dataGridView2.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView2.Columns[8].Name = "Total Amount";
-            dataGridView2.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView2.Columns[4].Width = 150;
+            dataGridView2.Columns[5].Name = "Discount";
+            dataGridView2.Columns[5].Width = 150;
+            dataGridView2.Columns[6].Name = "Tax";
+            dataGridView2.Columns[6].Width = 150;
+            dataGridView2.Columns[7].Name = "Total Amount";
+            dataGridView2.Columns[7].Width = 200;
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
