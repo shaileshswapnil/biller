@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -86,8 +86,6 @@
             this.dp_from = new System.Windows.Forms.DateTimePicker();
             this.dp_to = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.chk_sales = new System.Windows.Forms.CheckBox();
@@ -95,6 +93,9 @@
             this.chk_stock = new System.Windows.Forms.CheckBox();
             this.chk_prediction = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -782,6 +783,7 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel13, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.flowLayoutPanel2, 1, 0);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(47, 37);
             this.tableLayoutPanel11.Margin = new System.Windows.Forms.Padding(4);
@@ -790,26 +792,6 @@
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(772, 210);
             this.tableLayoutPanel11.TabIndex = 1;
-            // 
-            // tableLayoutPanel12
-            // 
-            this.tableLayoutPanel12.ColumnCount = 4;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(47, 255);
-            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 1;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(772, 7);
-            this.tableLayoutPanel12.TabIndex = 2;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tableLayoutPanel13
             // 
@@ -844,9 +826,9 @@
             this.chk_sales.AutoSize = true;
             this.chk_sales.Location = new System.Drawing.Point(3, 3);
             this.chk_sales.Name = "chk_sales";
-            this.chk_sales.Size = new System.Drawing.Size(65, 21);
+            this.chk_sales.Size = new System.Drawing.Size(122, 21);
             this.chk_sales.TabIndex = 0;
-            this.chk_sales.Text = "Sales";
+            this.chk_sales.Text = "Saless (in Rs.)";
             this.chk_sales.UseVisualStyleBackColor = true;
             this.chk_sales.CheckedChanged += new System.EventHandler(this.chk_sales_CheckedChanged);
             // 
@@ -855,9 +837,9 @@
             this.chk_profit.AutoSize = true;
             this.chk_profit.Location = new System.Drawing.Point(3, 30);
             this.chk_profit.Name = "chk_profit";
-            this.chk_profit.Size = new System.Drawing.Size(63, 21);
+            this.chk_profit.Size = new System.Drawing.Size(113, 21);
             this.chk_profit.TabIndex = 1;
-            this.chk_profit.Text = "Profit";
+            this.chk_profit.Text = "Profit (in Rs.)";
             this.chk_profit.UseVisualStyleBackColor = true;
             this.chk_profit.CheckedChanged += new System.EventHandler(this.chk_profit_CheckedChanged);
             // 
@@ -866,9 +848,9 @@
             this.chk_stock.AutoSize = true;
             this.chk_stock.Location = new System.Drawing.Point(3, 57);
             this.chk_stock.Name = "chk_stock";
-            this.chk_stock.Size = new System.Drawing.Size(65, 21);
+            this.chk_stock.Size = new System.Drawing.Size(117, 21);
             this.chk_stock.TabIndex = 2;
-            this.chk_stock.Text = "Stock";
+            this.chk_stock.Text = "Stock (in Pcs)";
             this.chk_stock.UseVisualStyleBackColor = true;
             this.chk_stock.CheckedChanged += new System.EventHandler(this.chk_stock_CheckedChanged);
             // 
@@ -877,48 +859,79 @@
             this.chk_prediction.AutoSize = true;
             this.chk_prediction.Location = new System.Drawing.Point(3, 84);
             this.chk_prediction.Name = "chk_prediction";
-            this.chk_prediction.Size = new System.Drawing.Size(131, 21);
+            this.chk_prediction.Size = new System.Drawing.Size(183, 21);
             this.chk_prediction.TabIndex = 3;
-            this.chk_prediction.Text = "Sales prediction";
+            this.chk_prediction.Text = "Sales prediction (in Pcs)";
             this.chk_prediction.UseVisualStyleBackColor = true;
             this.chk_prediction.CheckedChanged += new System.EventHandler(this.chk_prediction_CheckedChanged);
             // 
             // chart1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Name = "chart1";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Color = System.Drawing.Color.Crimson;
-            series17.Legend = "Legend1";
-            series17.Name = "Sales";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.Color = System.Drawing.Color.Blue;
-            series18.Legend = "Legend1";
-            series18.Name = "Profit";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series19.Color = System.Drawing.Color.Green;
-            series19.Legend = "Legend1";
-            series19.Name = "Stock";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series20.Color = System.Drawing.Color.Goldenrod;
-            series20.Legend = "Legend1";
-            series20.Name = "Prediction";
-            this.chart1.Series.Add(series17);
-            this.chart1.Series.Add(series18);
-            this.chart1.Series.Add(series19);
-            this.chart1.Series.Add(series20);
+            series1.BorderColor = System.Drawing.Color.White;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Crimson;
+            series1.Legend = "Legend1";
+            series1.Name = "Sales";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Date;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Blue;
+            series2.Legend = "Legend1";
+            series2.Name = "Profit";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.Green;
+            series3.Legend = "Legend1";
+            series3.Name = "Stock";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.Goldenrod;
+            series4.Legend = "Legend1";
+            series4.Name = "Prediction";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(279, 198);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(389, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(380, 204);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 4;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(47, 255);
+            this.tableLayoutPanel12.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(772, 7);
+            this.tableLayoutPanel12.TabIndex = 2;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // RecordsManagement_View_Product
             // 
@@ -1016,6 +1029,7 @@
         private System.Windows.Forms.CheckBox chk_stock;
         private System.Windows.Forms.CheckBox chk_prediction;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
 
 
 

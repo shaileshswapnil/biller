@@ -396,27 +396,11 @@ namespace WindowsFormsApplication1
         }
         private void calender_change()
         {
-            if (chk_sales.Checked == true)
-            {
-                chart_unchecked("Sales");
-                chart_checked("Sales");
-            }
-            if (chk_profit.Checked == true)
-            {
-                chart_unchecked("Profit");
-                chart_checked("Profit");
-            }
-            if (chk_stock.Checked == true)
-            {
-                chart_unchecked("Stock");
-                chart_checked("Stock");
-            }
-            if (chk_prediction.Checked == true)
-            {
-                chart_unchecked("Prediction");
-                chart_checked("Prediction");
-            }
-
+            chk_stock.Checked = false;
+            chk_stock.Checked = true;
+            chk_profit.Checked = false;
+            chk_sales.Checked = false;
+            chk_prediction.Checked = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -704,10 +688,10 @@ namespace WindowsFormsApplication1
             if (dayCount > 0 && dayCount < 60)
             {
                 Random random = new Random();
-                for (int i = 1; i <= dayCount; i++)
+                for (int i = 0; i <= dayCount; i++)
                 {
                     int randomNumber = random.Next(0, 200);
-                    this.chart1.Series[check_name].Points.AddXY(i, randomNumber);
+                    this.chart1.Series[check_name].Points.AddXY(fromDate.AddDays(i), randomNumber);
                 }
             }
         }
