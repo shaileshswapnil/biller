@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,82 @@ namespace WindowsFormsApplication1
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            String header = dataGridView2.Columns[1].HeaderText;
+            if (header.Equals("Product Name"))
+            {
+                TextBox productName = e.Control as TextBox;
+
+                if (productName != null)
+                {
+                    productName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection();
+                    FillItems(stringCollection);
+                    productName.AutoCompleteCustomSource = stringCollection;
+                    productName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                    setRowNumber(dataGridView2);
+                }
+            }
+
+
+        }
+
+        private void FillItems(AutoCompleteStringCollection stringCollection)
+        {
+            String connectionString =
+            "Data Source=avi-test-db.cbg17hlkwa4g.ap-south-1.rds.amazonaws.com;" +
+            "Initial Catalog=shop_erp;" +
+            "User id=admin;" +
+            "Password=12345678;";
+
+            String SqlString = @"SELECT ProductName FROM Product";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+
+                    SqlCommand cmd = new SqlCommand(SqlString, connection);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows == true)
+                    {
+                        while (dr.Read())
+                        {
+                            String Sname = dr.GetString(0);
+                            stringCollection.Add(Sname);
+
+                        }
+
+                    }
+
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Error!");
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+        private void setRowNumber(DataGridView dgv)
+        {
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                row.Cells[0].Value = (row.Index + 1).ToString();
+            }
+        }
+
+        private void dataGridView2_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            setRowNumber(dataGridView2);
         }
     }
 }
