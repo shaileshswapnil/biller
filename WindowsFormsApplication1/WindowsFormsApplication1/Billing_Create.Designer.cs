@@ -276,7 +276,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(149, 61);
             this.label8.TabIndex = 8;
-            this.label8.Text = "History";
+            this.label8.Text = "History1";
             // 
             // textBox8
             // 
